@@ -21,9 +21,9 @@ spec:
         - containerPort: 80
         env:
           - name: USERPROFILE_API_ENDPOINT
-            value: "userprofile-service"
+            value: "http://userprofile-service"
           - name: TRIPS_API_ENDPOINT
-            value: "trips-api"
+            value: "http://trips-api-service"
 ---
 apiVersion: v1
 kind: Service
