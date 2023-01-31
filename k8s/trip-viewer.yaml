@@ -31,9 +31,10 @@ metadata:
   name: trip-viewer-service
 spec:
   selector:
-    app.kubernetes.io/name: trip-viewer
+    app: trip-viewer
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+  type: LoadBalancer      
 
