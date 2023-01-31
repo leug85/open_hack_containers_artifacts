@@ -25,21 +25,17 @@ spec:
               secretKeyRef:
                 name: sql-secret
                 key: password
-                optional: false # same as default; "mysecret" must exist
-                                # and include a key named "password
           - name: SQL_SERVER
             value: "sqlservermjd9148.database.windows.net"
           - name: SQL_USER
             valueFrom:
               secretKeyRef:
                 name: sql-secret
-                key: login
-                optional: false # same as default; "mysecret" must exist
-                                # and include a key named "password
+                key: login     
           - name: OPENAPI_DOCS_URI
             value: "http://$EXTERNAL_IP"
 
-
+---
 apiVersion: v1
 kind: Service
 metadata:
