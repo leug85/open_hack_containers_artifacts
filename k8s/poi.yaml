@@ -21,9 +21,11 @@ spec:
         - containerPort: 80
         env:
           - name: SQL_PASSWORD
-            value: "yourStrong()Password"
+            value: "p@ssSQL!"
           - name: SQL_SERVER
-            value: "sqlserver"
+            value: "sqlservermjd9148.database.windows.net"
+          - name: SQL_USER
+            value: "sqladminmJd9148"          
           - name: ASPNETCORE_ENVIRONMENT
             value: "Development"
 
@@ -34,7 +36,8 @@ metadata:
   name: poi-service
 spec:
   selector:
-    app.kubernetes.io/name: poi
+    app: poi
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 80
