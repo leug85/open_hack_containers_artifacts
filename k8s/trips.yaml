@@ -21,11 +21,21 @@ spec:
         - containerPort: 80
         env:
           - name: SQL_PASSWORD
-            value: "p@ssSQL!"
+            valueFrom:
+              secretKeyRef:
+                name: sql-secret
+                key: password
+                optional: false # same as default; "mysecret" must exist
+                                # and include a key named "password
           - name: SQL_SERVER
             value: "sqlservermjd9148.database.windows.net"
           - name: SQL_USER
-            value: "sqladminmJd9148"    
+            valueFrom:
+              secretKeyRef:
+                name: sql-secret
+                key: login
+                optional: false # same as default; "mysecret" must exist
+                                # and include a key named "password
           - name: OPENAPI_DOCS_URI
             value: "http://$EXTERNAL_IP"
 
