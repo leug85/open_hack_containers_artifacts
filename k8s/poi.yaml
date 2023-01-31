@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poi
+  labels:
+    app: poi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: poi
+  template:
+    metadata:
+      labels:
+        app: poi
+    spec:
+      containers:
+      - name: app-poi
+        image: registrymjd9148.azurecr.io/tripinsights/poi:1.0
+        ports:
+        - containerPort: 80
+        env:
+          - name: SQL_PASSWORD
+            value: "yourStrong()Password"
+          - name: SQL_SERVER
+            value: "sqlserver"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: poi-service
+spec:
+  selector:
+    app.kubernetes.io/name: poi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
