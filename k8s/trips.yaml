@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: poi
+  name: trips-api
   namespace: api-dev
   labels:
-    app: poi
+    app: trips-api
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: poi
+      app: trips-api
   template:
     metadata:
       labels:
-        app: poi
+        app: trips-api
     spec:
       containers:
-      - name: app-poi
-        image: registrymjd9148.azurecr.io/tripinsights/poi:1.0
+      - name: app-trips-api
+        image: registrymjd9148.azurecr.io/tripinsights/trips:1.0
         ports:
         - containerPort: 80
         env:
@@ -32,19 +32,19 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: sql-secret
-                key: login
-          - name: ASPNETCORE_ENVIRONMENT
-            value: "Development"
+                key: login     
+          - name: OPENAPI_DOCS_URI
+            value: "http://$EXTERNAL_IP"
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   namespace: api-dev
-  name: poi-service
+  name: trips-api-service
 spec:
   selector:
-    app: poi
+    app: trips-api
   ports:
     - protocol: TCP
       port: 80

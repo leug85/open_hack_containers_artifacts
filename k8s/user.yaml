@@ -1,52 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: poi
+  name: user-java
   namespace: api-dev
   labels:
-    app: poi
+    app: user-java
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: poi
+      app: user-java
   template:
     metadata:
       labels:
-        app: poi
+        app: user-java
     spec:
       containers:
-      - name: app-poi
-        image: registrymjd9148.azurecr.io/tripinsights/poi:1.0
+      - name: app-user-java
+        image: registrymjd9148.azurecr.io/tripinsights/user-java:1.0
         ports:
         - containerPort: 80
         env:
           - name: SQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: sql-secret
-                key: password
+            value: "p@ssSQL!"
           - name: SQL_SERVER
             value: "sqlservermjd9148.database.windows.net"
           - name: SQL_USER
-            valueFrom:
-              secretKeyRef:
-                name: sql-secret
-                key: login
-          - name: ASPNETCORE_ENVIRONMENT
-            value: "Development"
+            value: "sqladminmJd9148" 
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   namespace: api-dev
-  name: poi-service
+  name: user-java-service
 spec:
   selector:
-    app: poi
+    app: user-java
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
 
+  
