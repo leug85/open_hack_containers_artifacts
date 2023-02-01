@@ -37,7 +37,6 @@ metadata:
 spec:
   selector:
     app: user-java
-  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 80
