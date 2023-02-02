@@ -5,6 +5,7 @@ metadata:
   namespace: api-dev
   labels:
     app: poi
+    group: api
 spec:
   replicas: 2
   selector:
